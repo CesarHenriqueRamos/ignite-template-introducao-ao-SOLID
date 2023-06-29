@@ -7,6 +7,9 @@ class ListAllUsersController {
 
   handle(request: Request, response: Response): Response {
     // Complete aqui
+    const { user_id } = request.params;
+    const users = this.listAllUsersUseCase.execute({ user_id });
+    return response.json(users);
   }
 }
 
