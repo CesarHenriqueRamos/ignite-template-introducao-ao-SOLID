@@ -1,0 +1,142 @@
+{
+  "openapi":"3.0.0",
+  "info":{
+    "title":"Rentalx API",
+    "description":"This is an API Rent",
+    "version":"1.0.0",
+    "contact":{
+      "email":"cesar252742@gmail.com"
+    }
+  },
+  "paths":{
+    "/users":{      
+      "post":{
+        "tags":["Users"],
+        "summary":"Create a User",
+        "description":"Create a new User",
+        "requestBody":{
+          "content":{
+            "application/json":{
+              "schema":{
+                "type":"object",
+                "properties":{
+                  "name":{
+                    "type":"string"
+                  },
+                  "email":{
+                    "type":"string"
+                  }
+                },
+                "example":{
+                  "name": "User Teste",
+	                "email": "teste@gmail.com"
+                }
+              }
+            }
+          }
+        },
+        "responses":{
+          "201":{
+            "description":"Created"
+          },
+          "500":{
+            "description":"User already exists"
+          }
+        }
+      },
+      "get":{
+        "tags":["Users"],
+        "summary":"List categories",
+        "description":"List Categories All",
+        "requestBody":{},
+        "responses":{
+          "200":{
+            "description":"Sucess",
+            "content":{
+              "aplication/json":{
+                "schema":{
+                  "type":"array",
+                  "itens":{
+                    "type":"object",
+                    "properties":{
+                      "name":{
+                        "type":"string"
+                      },
+                      "email":{
+                        "type":"string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500":{
+            "description":"User not Admin"
+          }
+        }
+      }
+    },
+    "/users/{user_id}":{
+      "get":{
+        "tags":["Users"],
+        "summary":"Show User Profile",
+        "description":"List User Unic",
+        "parameters":{
+          "name": "user_id",
+          "in": "path",
+          "description": "User ID",
+          "required": "true"
+        },
+        "responses":{
+          "200":{
+            "description":"Sucess",
+            "content":{
+              "aplication/json":{
+                "schema":{
+                  "type":"array",
+                  "itens":{
+                    "type":"object",
+                    "properties":{
+                      "name":{
+                        "type":"string"
+                      },
+                      "email":{
+                        "type":"string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500":{
+            "description":"User not exists"
+          }
+        }
+      }
+    },
+    "/users/{user_id}/admin":{
+      "patch":{
+        "paths":"/{:user_id}/admin",
+        "tags":["Users"],
+        "summary":"Turn User Admin",
+        "description":"Make an admin user",
+        "parameters":{
+          "name": "user_id",
+          "in": "path",
+          "description": "User ID",
+          "required": "true"
+        },
+        "responses":{
+          "201":{
+            "description":"Created"
+          },
+          "500":{
+            "description":"Category already exists"
+          }
+        }
+      }
+    }
+  }
+}
